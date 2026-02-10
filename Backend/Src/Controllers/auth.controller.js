@@ -1,5 +1,5 @@
 import cloudinary from "../Lib/cloudinary.js";
-import { genrateToken } from "../Lib/Utils.js";
+import { generateToken } from "../Lib/Utils.js";
 import User from "../Models/user.model.js";
 import bcrypt from "bcryptjs";
 export const signup = async (req,res) => {
@@ -27,8 +27,8 @@ export const signup = async (req,res) => {
         })
 
         if (newUser) {
-            // genrate jwt token here
-            genrateToken(newUser._id,res)
+            // generate jwt token here
+            generateToken(newUser._id,res)
             await newUser.save();
 
             res.status(201).json({
@@ -60,7 +60,7 @@ export const login = async (req,res) => {
         if (!isPasswordCorrect) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
-        genrateToken(user._id,res);
+        generateToken(user._id,res);
 
         res.status(200).json({
             _id:user._id,
@@ -91,7 +91,7 @@ export const updateProfile = async (req, res) => {
         const userId = req.user._id
 
         if (!profilePic) {
-            return res.status(400).json({ message: "Profile pic is requied" });
+            return res.status(400).json({ message: "Profile pic is required" });
         }
 
         const updateResponse = await cloudinary.uploader.upload(profilePic);
