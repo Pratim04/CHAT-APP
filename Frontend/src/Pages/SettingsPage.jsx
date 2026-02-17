@@ -1,5 +1,5 @@
 import { THEMES } from "../Constants";
-import { useTheneStore } from "../Store/useThemeStore";
+import { useThemeStore } from "../Store/useThemeStore";
 import { Send } from "lucide-react";
 
 const PREVIEW_MESSAGES = [
@@ -8,7 +8,7 @@ const PREVIEW_MESSAGES = [
 ];
 
 const SettingsPage = () => {
-    const { theme, setTheme } = useTheneStore();
+    const { theme, setTheme } = useThemeStore();
     return (
         <div className="min-h-screen container mx-auto px-4 pb-4 pt-20 max-w-5xl">
             <div className="space-y-6">

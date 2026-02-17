@@ -9,10 +9,12 @@ import ProfilePage from './Pages/ProfilePage.jsx';
 import SettingsPage from './Pages/SettingsPage.jsx';
 import { useAuthStore } from './Store/useAuthStore.js';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useTheneStore } from "./Store/useThemeStore.js";
+import { useThemeStore } from "./Store/useThemeStore.js";
 const App = () => {
-  const { authUser, checkAuth, isCheckingAuth } = useAuthStore()
-  const { theme } = useTheneStore();
+  const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore()
+  const { theme } = useThemeStore();
+
+  console.log(( onlineUsers ));
 
   useEffect(() => {
     checkAuth()
