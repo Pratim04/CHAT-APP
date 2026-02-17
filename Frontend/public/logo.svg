@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient for the main circle -->
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Gradient for the chat bubble -->
+    <linearGradient id="bubbleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#667eea" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background circle with gradient -->
+  <circle cx="200" cy="200" r="160" fill="url(#mainGradient)" filter="url(#shadow)"/>
+
+  <!-- Animated rings (representing sound waves/buzz) -->
+  <circle cx="200" cy="200" r="140" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2">
+    <animate attributeName="r" values="140;150;140" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="200" cy="200" r="130" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2">
+    <animate attributeName="r" values="130;145;130" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Main chat bubble -->
+  <path d="M 120 140 
+           Q 120 120 140 120 
+           L 260 120 
+           Q 280 120 280 140 
+           L 280 220 
+           Q 280 240 260 240 
+           L 200 240 
+           L 170 270 
+           L 175 240 
+           L 140 240 
+           Q 120 240 120 220 
+           Z" 
+        fill="url(#bubbleGradient)" 
+        filter="url(#glow)"
+        transform="translate(0, -10)">
+    <animateTransform attributeName="transform" type="translate" values="0,-10; 0,-15; 0,-10" dur="3s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Text lines inside bubble (representing chat) -->
+  <rect x="150" y="150" width="100" height="8" rx="4" fill="#667eea" opacity="0.8">
+    <animate attributeName="width" values="100;80;100" dur="4s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="150" y="170" width="80" height="8" rx="4" fill="#764ba2" opacity="0.7">
+    <animate attributeName="width" values="80;100;80" dur="4s" begin="0.5s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="150" y="190" width="60" height="8" rx="4" fill="#f093fb" opacity="0.6"/>
+
+  <!-- Lightning bolt / energy symbol (representing "buzz") -->
+  <path d="M 260 80 L 240 120 L 255 120 L 245 160 L 280 110 L 265 110 Z" fill="#ffd700" filter="url(#glow)">
+    <animateTransform attributeName="transform" type="rotate" values="0 260 120; 5 260 120; -5 260 120; 0 260 120" dur="0.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="1;0.7;1" dur="0.3s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- BUZZ text -->
+  <text x="200" y="340" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#667eea" letter-spacing="4">
+    BUZZ
+    <animate attributeName="fill" values="#667eea;#764ba2;#f093fb;#667eea" dur="4s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Small dots representing activity -->
+  <circle cx="160" cy="320" r="4" fill="#667eea">
+    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="200" cy="320" r="4" fill="#764ba2">
+    <animate attributeName="opacity" values="0;1;0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="240" cy="320" r="4" fill="#f093fb">
+    <animate attributeName="opacity" values="0;1;0" dur="1.5s" begin="1s" repeatCount="indefinite"/>
+  </circle>
+</svg>
