@@ -1,37 +1,35 @@
 import dotenv from "dotenv";
-import express from "express";
-import { connectDB } from "./Lib/db.js";
+import cors from "cors";
 import cookieParser from "cookie-parser";
+import express from "express";
+
+import { connectDB } from "./Lib/db.js";
 import authRoutes from "./Routes/auth.route.js";
 import messageRoutes from "./Routes/message.route.js";
-import cors from "cors";
+import { app, server } from "./Lib/socket.js";
 
 dotenv.config();
-const app = express();
 
 const PORT = process.env.PORT;
 
-// 🔥 1️⃣ CORS FIRST
+// CORS
 app.use(cors({
     origin: "http://localhost:5173",
     credentials: true,
 }));
 
-// 🔥 2️⃣ Body + Cookies (FIXED LIMIT)
+// Body parsers
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
+// Cookies
 app.use(cookieParser());
 
-// 🔥 2️⃣ Body + Cookies
-app.use(express.json());
-app.use(cookieParser());
-
-
-// 🔥 3️⃣ Routes
+// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-app.listen(PORT, () => {
-    console.log("Server is running on Port: " + PORT);
+server.listen(PORT, () => {
+    console.log("Server running on PORT:", PORT);
     connectDB();
 });
