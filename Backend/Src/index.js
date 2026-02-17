@@ -8,9 +8,13 @@ import authRoutes from "./Routes/auth.route.js";
 import messageRoutes from "./Routes/message.route.js";
 import { app, server } from "./Lib/socket.js";
 
+import path from "path";
+
 dotenv.config();
 
 const PORT = process.env.PORT;
+
+const __dirname = path.resolve();
 
 // CORS
 app.use(cors({
@@ -28,6 +32,14 @@ app.use(cookieParser());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
+
+if(process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../Frontend/dist")));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "../Frontend", "dist", "index.html"));
+    });
+};
 
 server.listen(PORT, () => {
     console.log("Server running on PORT:", PORT);
