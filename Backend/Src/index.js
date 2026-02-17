@@ -17,13 +17,19 @@ app.use(cors({
     credentials: true,
 }));
 
+// 🔥 2️⃣ Body + Cookies (FIXED LIMIT)
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
+app.use(cookieParser());
+
 // 🔥 2️⃣ Body + Cookies
 app.use(express.json());
 app.use(cookieParser());
 
+
 // 🔥 3️⃣ Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/message", messageRoutes);
+app.use("/api/messages", messageRoutes);
 
 app.listen(PORT, () => {
     console.log("Server is running on Port: " + PORT);
